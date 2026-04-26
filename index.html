@@ -3,81 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Pizzería Cleo - Pedidos</title>
-    <style>
-        body {
-            font-family: 'Trebuchet MS', sans-serif;
-            background-color: #111;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #b30000;
-            padding: 20px;
-            text-align: center;
-        }
-        header h1 {
-            font-family: 'Verdana', sans-serif;
-            font-size: 2.2em;
-            margin: 0;
-        }
-        header img {
-            max-width: 120px;
-            display: block;
-            margin: 15px auto 0 auto;
-            border-radius: 50%;
-            border: 3px solid #fff;
-            background-color: #111;
-            padding: 5px;
-        }
-        main {
-            padding: 20px;
-            max-width: 600px;
-            margin: auto;
-        }
-        .pizza-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #222;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-        .pizza-row label {
-            flex: 1;
-            font-weight: bold;
-        }
-        .pizza-row input {
-            width: 70%;
-            padding: 5px;
-            border-radius: 5px;
-            border: none;
-            text-align: center;
-        }
-        button {
-            margin-top: 20px;
-            width: 100%;
-            padding: 15px;
-            background-color: #b30000;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-            cursor: pointer;
-            font-family: 'Verdana', sans-serif;
-        }
-        button:hover {
-            background-color: #e60000;
-        }
-        footer {
-            background-color: #222;
-            text-align: center;
-            padding: 15px;
-            margin-top: 30px;
-            font-size: 0.9em;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
     <header>
@@ -115,44 +42,7 @@
         <p>WhatsApp pedidos: +54 3444 49-7985</p>
     </footer>
 
-    <script>
-        function enviarPedido() {
-            let muzza = parseInt(document.getElementById("muzza").value) || 0;
-            let jamon = parseInt(document.getElementById("jamon").value) || 0;
-            let roquefort = parseInt(document.getElementById("roquefort").value) || 0;
-            let direccion = document.getElementById("direccion").value.trim();
+    <script src="app.js"></script>
 
-            let mensaje = "Hola, quiero pedir:\n";
-            let total = 0;
-
-            if (muzza > 0) {
-                mensaje += `${muzza} x Muzza ($6700)\n`;
-                total += muzza * 6700;
-            }
-            if (jamon > 0) {
-                mensaje += `${jamon} x Jamón y Morrón ($7700)\n`;
-                total += jamon * 7700;
-            }
-            if (roquefort > 0) {
-                mensaje += `${roquefort} x Roquefort ($7700)\n`;
-                total += roquefort * 7700;
-            }
-
-            if (total === 0) {
-                alert("Por favor seleccioná al menos una pizza.");
-                return;
-            }
-            if (!direccion) {
-                alert("Por favor ingresá tu dirección de entrega.");
-                return;
-            }
-
-            mensaje += `\nTotal: $${total}\n`;
-            mensaje += `Dirección: ${direccion}`;
-
-            let url = `https://wa.me/543444497985?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, "_blank");
-        }
-    </script>
 </body>
 </html>
