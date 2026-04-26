@@ -1,24 +1,38 @@
+(function inicializarDesdeConfig() {
+    const { menuItems, delivery, whatsapp } = window.APP_CONFIG;
+    const menuRows = document.getElementById("menuRows");
+    const direccionRow = document.getElementById("direccionRow");
+    const whatsappDisplay = document.getElementById("whatsappDisplay");
+
+    menuRows.innerHTML = menuItems.map((item) => `
+        <div class="pizza-row">
+            <label>${item.name} - $${item.price}</label>
+            <input type="number" id="${item.id}" min="0" value="0" step="1">
+        </div>
+    `).join("");
+
+    direccionRow.innerHTML = `
+        <label>${delivery.label}</label>
+        <input type="text" id="direccion" placeholder="${delivery.placeholder}">
+    `;
+
+    whatsappDisplay.textContent = whatsapp.display;
+})();
+
 function enviarPedido() {
-    let muzza = parseInt(document.getElementById("muzza").value) || 0;
-    let jamon = parseInt(document.getElementById("jamon").value) || 0;
-    let roquefort = parseInt(document.getElementById("roquefort").value) || 0;
+    const { menuItems, whatsapp } = window.APP_CONFIG;
     let direccion = document.getElementById("direccion").value.trim();
 
     let mensaje = "Hola, quiero pedir:\n";
     let total = 0;
 
-    if (muzza > 0) {
-        mensaje += `${muzza} x Muzza ($6700)\n`;
-        total += muzza * 6700;
-    }
-    if (jamon > 0) {
-        mensaje += `${jamon} x Jamón y Morrón ($7700)\n`;
-        total += jamon * 7700;
-    }
-    if (roquefort > 0) {
-        mensaje += `${roquefort} x Roquefort ($7700)\n`;
-        total += roquefort * 7700;
-    }
+    menuItems.forEach((item) => {
+        const cantidad = parseInt(document.getElementById(item.id).value) || 0;
+        if (cantidad > 0) {
+            mensaje += `${cantidad} x ${item.name} ($${item.price})\n`;
+            total += cantidad * item.price;
+        }
+    });
 
     if (total === 0) {
         alert("Por favor seleccioná al menos una pizza.");
@@ -32,6 +46,6 @@ function enviarPedido() {
     mensaje += `\nTotal: $${total}\n`;
     mensaje += `Dirección: ${direccion}`;
 
-    let url = `https://wa.me/543444497985?text=${encodeURIComponent(mensaje)}`;
+    let url = `https://wa.me/${whatsapp.phone}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, "_blank");
 }

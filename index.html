@@ -17,31 +17,18 @@
 
     <main>
         <form id="pedidoForm">
-            <div class="pizza-row">
-                <label>Muzza - $6700</label>
-                <input type="number" id="muzza" min="0" value="0" step="1">
-            </div>
-            <div class="pizza-row">
-                <label>Jamón y Morrón - $7700</label>
-                <input type="number" id="jamon" min="0" value="0" step="1">
-            </div>
-            <div class="pizza-row">
-                <label>Roquefort - $7700</label>
-                <input type="number" id="roquefort" min="0" value="0" step="1">
-            </div>
-            <div class="pizza-row">
-                <label>Dirección de entrega:</label>
-                <input type="text" id="direccion" placeholder="Ej: San Martín 123">
-            </div>
+            <div id="menuRows"></div>
+            <div class="pizza-row" id="direccionRow"></div>
 
             <button type="button" onclick="enviarPedido()">Enviar pedido por WhatsApp</button>
         </form>
     </main>
 
     <footer>
-        <p>WhatsApp pedidos: +54 3444 49-7985</p>
+        <p>WhatsApp pedidos: <span id="whatsappDisplay"></span></p>
     </footer>
 
+    <script src="config.js"></script>
     <script src="app.js"></script>
 
 </body>
